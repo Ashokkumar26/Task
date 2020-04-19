@@ -1,48 +1,21 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import Calender from './Calender'
 import {taskAction, openAdd, openEditAction, saveTaskAction, removeTaskAction, switchToLIst} from '../redux/task/taskAction'
-import {LIST, ADD, EDIT} from "../redux/task/modes"
-import shortid from "shortid";
-
-const TaskList = ({tasks, edit, remove}) => 
-    <table>
-                    <thead>
-                        <th>Description</th>
-                        <th>User</th>
-                        <th>Date</th>
-                    </thead>
-                    <tbody>
-                        {tasks.map((task, i) => <tr key={i} onClick={() => edit(task)}>
-                            <td>{task.description}</td>
-                            <td>{task.user}</td>
-                            <td>{task.date}</td>
-                            <td><button onClick={e => {
-                                remove(task);
-                                e.stopPropagation();
-                            }}>Remove</button></td>
-                        </tr>)}
-                    </tbody>
-                </table>
-
-
-const Body = ({mode: {type: mode, task: task}, tasks, addTask, openEdit, saveTask, removeTask, cancel}) => {
-    switch(mode) {
-        case LIST: return <TaskList tasks={tasks} edit={openEdit}remove={removeTask}/>
-        case ADD: return <Calender onSave={task => {addTask({...task, id: shortid.generate()})}} onCancel={cancel} />
-        case EDIT: return <Calender onSave={saveTask} task={task}  onCancel={cancel}/>
-        default: return <h1>Undefined Mode</h1>
-    }
-} 
+import Body from './Body'
+import './App.css'
 
 class Task extends Component {
 
     render() {
         console.log(this.props.tasks)
         return (
-            <div>
-                <h3>Task</h3>
-                <button onClick={this.props.openAdd}>Add</button>
+            <div className='content'>
+                <div className='row border'>
+                <h4 className='col-10 p-0 mt-3 pl-2'>TASKS</h4>
+                <button className='col-2 btn btn-light m-0 p-0' onClick={this.props.openAdd}>
+                <i class="material-icons" style={{fontSize:"48px",color:"green"}}>add</i>
+                    </button>
+                </div>
                 <Body {...this.props}></Body>
             </div>
         )

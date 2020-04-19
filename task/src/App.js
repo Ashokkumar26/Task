@@ -1,6 +1,5 @@
 import React from 'react';
 // import './App.css';
-import Calender from './component/Calender';
 import Task from './component/Task'
 import store from './redux/store'
 import { Provider } from 'react-redux'
