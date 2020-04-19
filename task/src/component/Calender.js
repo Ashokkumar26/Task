@@ -46,6 +46,7 @@ export class Calender extends Component {
     }
 
     submitHandler = e => {
+        e.preventDefault();
         const isvalid = this.validate();
         if(isvalid){
             this.props.onSave && this.props.onSave(this.state.task);
@@ -84,7 +85,7 @@ export class Calender extends Component {
                     <button onClick={(e) => {
                         this.props.onCancel && this.props.onCancel(this.state.task)}}
                         className='btn btn-light ml-5 mr-3'>Cancel</button>
-                    <button type="submit" onClick={this.submitHandler} className='btn btn-success px-4'>Save</button>
+                    <button onClick={this.submitHandler} className='btn btn-success px-4'>Save</button>
                 </form>
             </div>
         )
